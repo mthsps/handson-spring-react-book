@@ -2,8 +2,10 @@ package com.org.cardatabase;
 
 import com.org.cardatabase.model.Car;
 import com.org.cardatabase.model.Owner;
+import com.org.cardatabase.model.User;
 import com.org.cardatabase.repository.CarRepository;
 import com.org.cardatabase.repository.OwnerRepository;
+import com.org.cardatabase.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,6 +23,9 @@ public class CarDatabaseApplication {
 
 	@Autowired
 	private OwnerRepository ownerRepository;
+
+	@Autowired
+	private UserRepository userRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CarDatabaseApplication.class, args);
@@ -55,6 +60,14 @@ public class CarDatabaseApplication {
 
 			owner3.getCars().addAll(Arrays.asList(car2, car3));
 			ownerRepository.save(owner3);
+
+			userRepository.save(new User("user",
+					"$2a$04$1.YhMIgNX/8TkCKGFUONWO1waedKhQ5KrnB30fl0Q01QKqmzLf.Zi",
+					"USER"));
+
+			userRepository.save(new User("admin",
+					"$2a$04$KNLUwOWHVQZVpXyMBNc7JOzbLiBjb9Tk9bP7KNcPI12ICuvzXQQKG",
+					"ADMIN"));
 		};
 
 	}
